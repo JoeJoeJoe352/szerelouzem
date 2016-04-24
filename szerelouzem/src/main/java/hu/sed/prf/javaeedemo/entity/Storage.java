@@ -2,23 +2,19 @@ package hu.sed.prf.javaeedemo.entity;
 
 	import java.io.Serializable;
 	import java.util.List;
-
+		
 	import javax.persistence.Entity;
-	import javax.persistence.FetchType;
 	import javax.persistence.GeneratedValue;
 	import javax.persistence.GenerationType;
 	import javax.persistence.Id;
-	import javax.persistence.JoinColumn;
-	import javax.persistence.JoinTable;
-	import javax.persistence.OneToMany;
 	import javax.persistence.Table;
 
 
 	@Entity
-	@Table(name = "product_category")
-	public class ProductCategory implements Serializable {
+	@Table(name = "storage")
+	public class Storage implements Serializable {
 		
-		private static final long serialVersionUID = -1583355602420130917L;;
+		private static final long serialVersionUID = -1783655608420130917L;;
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.TABLE)
@@ -26,19 +22,18 @@ package hu.sed.prf.javaeedemo.entity;
 		
 		private String name;
 
-		@OneToMany(fetch = FetchType.LAZY)
-		@JoinTable(name = "products_category", joinColumns = @JoinColumn(name = "product_category_id"), 
-				inverseJoinColumns = @JoinColumn(name = "product_id"))
-		private List<Product> products;
-		
-		public ProductCategory() {
+		/*@ManyToOne(fetch = FetchType.LAZY)
+		@JoinTable(name = "parts_storage", joinColumns = @JoinColumn(name = "part_id"), 
+				inverseJoinColumns = @JoinColumn(name = "storage_id"))*/
+		//private List<Part> parts;
+
+		public Storage() {
 		}
-		
-		public ProductCategory(Long id, String name, List<Product> products) {
+
+		public Storage(Long id, String name) {
 			super();
 			this.id = id;
 			this.name = name;
-			this.products = products;
 		}
 
 		public Long getId() {
@@ -57,13 +52,13 @@ package hu.sed.prf.javaeedemo.entity;
 			this.name = name;
 		}
 
-		public List<Product> getProducts() {
-			return products;
+		/*public List<Part> getParts() {
+			return parts;
 		}
 
-		public void setProducts(List<Product> products) {
-			this.products = products;
-		}
+		public void setParts(List<Part> parts) {
+			this.parts = parts;
+		}*/
 
 		@Override
 		public int hashCode() {
@@ -81,7 +76,7 @@ package hu.sed.prf.javaeedemo.entity;
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			ProductCategory other = (ProductCategory) obj;
+			Storage other = (Storage) obj;
 			if (id == null) {
 				if (other.id != null)
 					return false;
@@ -92,7 +87,7 @@ package hu.sed.prf.javaeedemo.entity;
 
 		@Override
 		public String toString() {
-			return "ProductCategory [id=" + id + ", name=" + name
-					+ ", products=" + products + "]";
+			return "Storage [id=" + id + ", name=" + name + ", parts=" + "]";
 		}
+
 }

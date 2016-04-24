@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	
+	<f:metadata>
+		<f:event 
+			type="preRenderView"
+			listener="#{selectedProductContainer.selectProduct(param['product'])}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{partDataModel.load()}" />
+	</f:metadata>
+	
+	<ui:define name="content">
+	
+		<h1>#{selectedProductContainer.selectedProduct.name} alapanyagainak listjája</h1>
+
+		<h:form id="partDataListForm">
+			
+			<div>
+				<h:outputText
+					value="Még nem vettek fel alapanyagot"
+					rendered="#{empty partDataModel.list}" />
+			</div>
+			
+			<h:dataTable 
+				id="partDataTable"
+				value="#{partDataModel.list}"
+				var="partData"
+				rendered="#{not empty partDataModel.list}"
+				styleClass="simpletablestyle">
+				
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{part.id}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Név</f:facet>
+					<h:outputText value="#{part.name}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Mennyiség</f:facet>
+					<h:outputText value="#{part.quantity}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Műveletek</f:facet>
+					<h:link 
+						value="Szerkesztés TODO" 
+						outcome="/content/part/edit">
+						<f:param name="id" value="#{partData.id}" />
+					</h:link>
+					<h:commandLink
+						value="Törlés" 
+						action="#{partDataAction.remove(partData.id)}" />
+				</h:column>
+			
+			</h:dataTable>
+			
+			<h:link
+				value="Új alapanyag"
+				outcome="/content/partdata/edit" />
+			<h:link
+				value="Vissza a termékek listájára"
+				outcome="/content/product/list" />
+				
+		</h:form>
+
+	</ui:define>
+</ui:composition>

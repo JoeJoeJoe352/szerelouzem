@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ext="http://java.sun.com/jsf/composite/ext"
+	template="/templates/default.xhtml">
+	
+	<f:metadata>
+		<f:viewParam
+			name="id" 
+			value="#{partDataAction.id}" />
+		<f:event
+			type="preRenderView"
+			listener="#{partDataAction.load()}" />
+	</f:metadata>
+	
+	<ui:define name="content">
+	<h1>TODO :)</h1>
+	<!-- 
+		<h1>#{empty weightDataAction.id ? 'Új testsúly mérési adat felvétele' : 'Testsúly mérési adat szerkesztése'}</h1>
+		
+		<h:form id="weightDataForm">
+		
+			<ext:labeledField 
+				forId="weight" 
+				label="Testsúly">
+				<h:inputText 
+					id="weight" 
+					value="#{weightDataAction.entity.weight}"
+					required="true">
+					<f:convertNumber />
+				</h:inputText>
+				<h:outputText value=" kg" />
+			</ext:labeledField>
+			
+			<ext:labeledField 
+				forId="date" 
+				label="Mérés dátuma">
+				<h:inputText 
+					id="date" 
+					value="#{weightDataAction.entity.date}"
+					required="true">
+					<f:convertDateTime pattern="yyyy. MM. dd. HH:mm:ss" />
+				</h:inputText>
+			</ext:labeledField>
+			
+			<h:commandLink 
+				value="Mentés" 
+				action="#{weightDataAction.persist()}" />
+				
+			<h:link
+				value="Vissza"
+				outcome="/content/weightdata/list" />
+		
+		</h:form>
+-->
+	</ui:define>
+</ui:composition>

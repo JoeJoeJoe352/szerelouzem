@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ext="http://java.sun.com/jsf/composite/ext"
+	template="/templates/default.xhtml">
+	
+	<f:metadata>
+		<f:viewParam
+			name="id" 
+			value="#{productAction.id}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{productAction.load()}" />
+	</f:metadata>
+	
+	<ui:define name="content">
+	
+		<h1>#{empty productAction.id ? 'Új termék felvétele' : 'Termék adatainak szerkesztése'}</h1>
+		
+		<h:form id="productEditForm">
+			
+			<ext:labeledField 
+				forId="productName" 
+				label="Név">
+				<h:inputText 
+					id="productName" 
+					value="#{productAction.entity.name}"
+					required="true" />
+			</ext:labeledField>
+			<!-- 
+			<ext:labeledField 
+				forId="partName" 
+				label="Parts-TODO:MULTIPLE CHOICE">
+				<h:inputText 
+					id="partName" 
+					value="#{productAction.entity.part}"
+					required="false" />
+			</ext:labeledField>
+			-->
+			<h:commandLink
+				value="Mentés" 
+				action="#{productAction.persist()}" />
+				
+			<h:link
+				value="Vissza"
+				outcome="/content/product/list" />
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>
