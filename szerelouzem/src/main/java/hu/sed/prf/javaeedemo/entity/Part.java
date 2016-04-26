@@ -30,16 +30,22 @@ package hu.sed.prf.javaeedemo.entity;
 				inverseJoinColumns = @JoinColumn(name = "storage_id"))
 		private Storage storage;
 		
+		@ManyToOne(fetch = FetchType.LAZY)
+		@JoinTable(name = "parts_product", joinColumns = @JoinColumn(name = "part_id"), 
+				inverseJoinColumns = @JoinColumn(name = "product_id"))
+		private Product product;
+		
 		private int quantity;
 		
 		public Part() {
 		}
 
-		public Part(Long id, String name, Storage storage, int quantity) {
+		public Part(Long id, String name, Storage storage, Product product, int quantity) {
 			super();
 			this.id = id;
 			this.name = name;
 			this.storage = storage;
+			this.product = product;
 			this.quantity = quantity;
 		}
 
@@ -75,6 +81,14 @@ package hu.sed.prf.javaeedemo.entity;
 			this.quantity = quantity;
 		}
 
+		public Product getProduct() {
+			return product;
+		}
+
+		public void setProduct(Product product) {
+			this.product = product;
+		}
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -103,9 +117,8 @@ package hu.sed.prf.javaeedemo.entity;
 		@Override
 		public String toString() {
 			return "Part [id=" + id + ", name=" + name + ", storage=" + storage
-					+ ", quantity=" + quantity + "]";
+					+ ", product=" + product + ", quantity=" + quantity + "]";
 		}
-
 
 }
 

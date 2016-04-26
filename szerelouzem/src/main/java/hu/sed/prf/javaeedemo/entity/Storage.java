@@ -22,11 +22,6 @@ package hu.sed.prf.javaeedemo.entity;
 		
 		private String name;
 
-		/*@ManyToOne(fetch = FetchType.LAZY)
-		@JoinTable(name = "parts_storage", joinColumns = @JoinColumn(name = "part_id"), 
-				inverseJoinColumns = @JoinColumn(name = "storage_id"))*/
-		//private List<Part> parts;
-
 		public Storage() {
 		}
 
@@ -51,14 +46,6 @@ package hu.sed.prf.javaeedemo.entity;
 		public void setName(String name) {
 			this.name = name;
 		}
-
-		/*public List<Part> getParts() {
-			return parts;
-		}
-
-		public void setParts(List<Part> parts) {
-			this.parts = parts;
-		}*/
 
 		@Override
 		public int hashCode() {
@@ -87,7 +74,7 @@ package hu.sed.prf.javaeedemo.entity;
 
 		@Override
 		public String toString() {
-			return "Storage [id=" + id + ", name=" + name + ", parts=" + "]";
+			return "Storage [id=" + id + ", name=" + name + "]";
 		}
 
 }

@@ -1,11 +1,16 @@
 package hu.sed.prf.javaeedemo.dao;
 
 
-	import javax.persistence.Query;
+	import java.util.LinkedList;
+import java.util.List;
+
+import javax.persistence.Query;
 
 	import hu.sed.prf.javaeedemo.dao.GenericDao;
+import hu.sed.prf.javaeedemo.entity.Part;
 import hu.sed.prf.javaeedemo.entity.Product;
 import hu.sed.prf.javaeedemo.entity.ProductCategory;
+import hu.sed.prf.javaeedemo.entity.Storage;
 
 	public class ProductDao extends GenericDao<Product, Long> {
 
@@ -19,19 +24,10 @@ import hu.sed.prf.javaeedemo.entity.ProductCategory;
 			//TODO: minden adott kategoriaju product eltavolitasa
 		}
 		
-		//TODO: lekerdezes
-		/* segitseg:
-		public void removeByPatient(Patient patient) {
-			StringBuilder queryBuilder = new StringBuilder();
-			queryBuilder.append("	delete ");
-			queryBuilder.append("	from ");
-			queryBuilder.append("		MeasurementData measurementData ");
-			queryBuilder.append("	where ");
-			queryBuilder.append("		measurementData.patient = :patient ");
-			
-			Query query = getEntityManager().createQuery(queryBuilder.toString());
-			query.setParameter("patient", patient);
-			query.executeUpdate();
-		}*/
+		public List<Product> findByProductCategory(Product product) {
+			//TODO: minden adott kategoriaban levo product kigyujtese listaba
+			List<Product> list = new LinkedList();
+			return list;
+		}
 
 	}

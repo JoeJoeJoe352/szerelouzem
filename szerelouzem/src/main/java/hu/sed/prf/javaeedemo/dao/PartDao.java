@@ -21,7 +21,7 @@ import hu.sed.prf.javaeedemo.entity.Storage;
 		}
 		
 		public List<Part> findByProduct(Product product) {
-			//TODO: impl.
+			//TODO: minden adott producthoz tartozo part kigyujtese listaba
 			/* segitseg:
 			StringBuilder queryBuilder = new StringBuilder();
 			queryBuilder.append("	select ");
@@ -38,23 +38,18 @@ import hu.sed.prf.javaeedemo.entity.Storage;
 			return list;
 		}
 		
+		public List<Part> findByStorage(Storage storage) {
+			//TODO: minden adott storage-ba levo part kigyujtese listaba
+			List<Part> list = new LinkedList();
+			return list;
+		}
+		
 		public void removeByStorage(Storage storage) {
 			//TODO: minden adott storage-ba levo part eltavolitasa
 		}
 		
-		//TODO: egyeb lekerdezes
-		/* segitseg:
-		public void removeByPatient(Patient patient) {
-			StringBuilder queryBuilder = new StringBuilder();
-			queryBuilder.append("	delete ");
-			queryBuilder.append("	from ");
-			queryBuilder.append("		MeasurementData measurementData ");
-			queryBuilder.append("	where ");
-			queryBuilder.append("		measurementData.patient = :patient ");
-			
-			Query query = getEntityManager().createQuery(queryBuilder.toString());
-			query.setParameter("patient", patient);
-			query.executeUpdate();
-		}*/
+		public void removeByProduct(Product product) {
+			//TODO: minden adott Producthoz tartozo part eltavolitasa
+		}
 
 	}

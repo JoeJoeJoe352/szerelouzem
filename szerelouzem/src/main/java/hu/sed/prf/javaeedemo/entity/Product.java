@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,23 +28,21 @@ import javax.persistence.Table;
 		private Long id;
 		
 		private String name;
-
-		@OneToMany(fetch = FetchType.LAZY)
-		@JoinTable(name = "parts_product", joinColumns = @JoinColumn(name = "product_id"), 
-				inverseJoinColumns = @JoinColumn(name = "part_id"))
-		private List<Part> parts;
-
-		private String part;
+		
+		@ManyToOne(fetch = FetchType.LAZY)
+		@JoinTable(name = "products_productCategory", joinColumns = @JoinColumn(name = "product_id"), 
+				inverseJoinColumns = @JoinColumn(name = "productCategory_id"))
+		private ProductCategory productCategory;
 		
 		public Product() {
 		}
 
 		
-		public Product(Long id, String name, List<Part> parts) {
+		public Product(Long id, String name, ProductCategory productCategory) {
 			super();
 			this.id = id;
 			this.name = name;
-			this.parts = parts;
+			this.productCategory = productCategory;
 		}
 
 
@@ -66,25 +65,15 @@ import javax.persistence.Table;
 			this.name = name;
 		}
 
-
-		public List<Part> getParts() {
-			return parts;
+		public ProductCategory getProductCategory() {
+			return productCategory;
 		}
 
 
-		public void setParts(List<Part> parts) {
-			this.parts = parts;
+		public void setProductCategory(ProductCategory productCategory) {
+			this.productCategory = productCategory;
 		}
 
-		
-		public String getPart() {
-			return part;
-		}
-
-
-		public void setPart(String part) {
-			this.part = part;
-		}
 
 		@Override
 		public int hashCode() {
@@ -114,8 +103,8 @@ import javax.persistence.Table;
 
 		@Override
 		public String toString() {
-			return "Product [id=" + id + ", name=" + name + ", parts=" + parts
-					+ "]";
+			return "Product [id=" + id + ", name=" + name
+					+ ", productCategory=" + productCategory + "]";
 		}
 
 		
