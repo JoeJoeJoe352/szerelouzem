@@ -22,5 +22,11 @@ public class ProductDataModel extends AbstractDataModel<Product, Long> {
 	protected GenericDao<Product, Long> getEntityDao() {
 		return productDao;
 	}
+	
+	@Override
+	public void load() {
+		//todo
+		//Minta: setList(weightDataDAO.findByPatient(selectedPatientContainer.getSelectedPatient()));
+	}
 
 }
