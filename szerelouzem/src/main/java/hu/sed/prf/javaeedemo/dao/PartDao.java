@@ -21,35 +21,43 @@ import hu.sed.prf.javaeedemo.entity.Storage;
 		}
 		
 		public List<Part> findByProduct(Product product) {
-			//TODO: minden adott producthoz tartozo part kigyujtese listaba
-			/* segitseg:
-			StringBuilder queryBuilder = new StringBuilder();
-			queryBuilder.append("	select ");
-			queryBuilder.append("		weightData ");
-			queryBuilder.append("	from ");
-			queryBuilder.append("		WeightData weightData ");
-			queryBuilder.append("	where ");
-			queryBuilder.append("		weightData.patient = :patient ");
-			
-			TypedQuery<WeightData> query = getEntityManager().createQuery(queryBuilder.toString(), getEntityClass());
-			query.setParameter("patient", patient);
-			return query.getResultList();*/
-			List<Part> list = new LinkedList();
-			return list;
+			StringBuilder sb = new StringBuilder();
+			sb.append("select part from Part part");
+			sb.append(" where part.product = :prod");
+					
+			TypedQuery<Part> query = getEntityManager().createQuery(sb.toString(), getEntityClass());
+			query.setParameter("prod", product);
+			return query.getResultList();
 		}
 		
 		public List<Part> findByStorage(Storage storage) {
-			//TODO: minden adott storage-ba levo part kigyujtese listaba
-			List<Part> list = new LinkedList();
-			return list;
+			StringBuilder sb = new StringBuilder();
+			sb.append("select part from Part part");
+			sb.append(" where part.storage = :stor");
+					
+			TypedQuery<Part> query = getEntityManager().createQuery(sb.toString(), getEntityClass());
+			query.setParameter("stor", storage);
+			return query.getResultList();
 		}
 		
 		public void removeByStorage(Storage storage) {
-			//TODO: minden adott storage-ba levo part eltavolitasa
+			StringBuilder sb = new StringBuilder();
+			sb.append("delete from Part part");
+			sb.append("	where part.storage = :stor");
+			
+			Query query = getEntityManager().createQuery(sb.toString());
+			query.setParameter("stor", storage);
+			query.executeUpdate();
 		}
 		
 		public void removeByProduct(Product product) {
-			//TODO: minden adott Producthoz tartozo part eltavolitasa
+			StringBuilder sb = new StringBuilder();
+			sb.append("delete from Part part");
+			sb.append("	where part.product = :prod");
+			
+			Query query = getEntityManager().createQuery(sb.toString());
+			query.setParameter("prod", product);
+			query.executeUpdate();
 		}
 
 	}
