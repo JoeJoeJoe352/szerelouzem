@@ -6,16 +6,18 @@
 	template="/templates/default.xhtml">
 	
 	<f:metadata>
+		<!--  Hibát dob. Couldn't resolved
 		<f:event 
 			type="preRenderView"
 			listener="#{productDataModel.load()}" />
+			-->
 	</f:metadata>
 	
 	<ui:define name="content">
 	
 		<h1>Termékek listája</h1>
 
-		<h:form id="patientListForm">
+		<h:form id="ProductListForm">
 			
 			<div>
 				<h:outputText

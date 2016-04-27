@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	
+	<f:metadata>
+		<!--   <f:event 
+			type="preRenderView"
+			listener="#{ProductCategoryDataModel.load()}" />-->
+	</f:metadata>
+	
+	<ui:define name="content">
+	
+		<h1>Kategóriák</h1>
+
+		<h:form id="categoryListForm">
+			
+			<div>
+				<h:outputText
+					value="Még nem vettek fel kategóriát az adatbázisba"
+					rendered="#{empty ProductCategoryDataModel.list}" />
+			</div>
+		
+			<h:dataTable 
+				id="categoryTable"
+				value="#{ProductCategoryDataModel.list}"
+				var="category"
+				rendered="#{not empty ProductCategoryDataModel.list}"
+				styleClass="simpletablestyle">
+				
+				<h:column>
+					<f:facet name="header">Név</f:facet>
+					<h:outputText value="#{category.name}" />
+				</h:column>
+				
+			
+			</h:dataTable>
+			
+			<h:link
+				value="Új kategória felvétele"
+				outcome="/content/category/edit" />
+			<h:link
+				value="Vissza"
+				outcome="/index" />
+				
+		</h:form>
+
+	</ui:define>
+</ui:composition>

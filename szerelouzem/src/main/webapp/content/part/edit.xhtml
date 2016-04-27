@@ -16,44 +16,58 @@
 	</f:metadata>
 	
 	<ui:define name="content">
-	<h1>TODO :)</h1>
-	<!-- 
-		<h1>#{empty weightDataAction.id ? 'Új testsúly mérési adat felvétele' : 'Testsúly mérési adat szerkesztése'}</h1>
+		<h1>#{empty partDataAction.id ? 'Új alkatrész felvétele' : 'Alkatrész adatainak szerkesztése'}</h1>
 		
-		<h:form id="weightDataForm">
-		
-			<ext:labeledField 
-				forId="weight" 
-				label="Testsúly">
+		<h:form id="partDataEditForm">
+
+			<div>
+				<h:outputLabel 
+					for="partName" 
+					value="Név: "/>
 				<h:inputText 
-					id="weight" 
-					value="#{weightDataAction.entity.weight}"
-					required="true">
-					<f:convertNumber />
-				</h:inputText>
-				<h:outputText value=" kg" />
-			</ext:labeledField>
+					id="patientName" 
+					value="#{partDataAction.entity.name}"
+					required="true" />
+				<h:message 
+					for="partName" 
+					styleClass="error" />
+			</div>
 			
-			<ext:labeledField 
-				forId="date" 
-				label="Mérés dátuma">
+			<div>
+				<h:outputLabel 
+					for="partQuantity" 
+					value="darabszám: "/>
 				<h:inputText 
-					id="date" 
-					value="#{weightDataAction.entity.date}"
+					id="partQuantity" 
+					value="#{partDataAction.entity.quantity}"
 					required="true">
-					<f:convertDateTime pattern="yyyy. MM. dd. HH:mm:ss" />
 				</h:inputText>
-			</ext:labeledField>
+				<h:message 
+					for="partQuantity" 
+					styleClass="error" />
+			</div>
 			
-			<h:commandLink 
+			<div>
+				<h:outputLabel 
+					for="partStorage" 
+					value="raktár: "/>
+				<h:inputText 
+					id="partStorage" 
+					value="#{partDataAction.entity.storage}"
+					required="true" />
+				<h:message 
+					for="partStorage" 
+					styleClass="error" />
+			</div>
+			
+			
+			<h:commandLink
 				value="Mentés" 
-				action="#{weightDataAction.persist()}" />
+				action="#{patientAction.persist()}" />
 				
 			<h:link
 				value="Vissza"
-				outcome="/content/weightdata/list" />
+				outcome="/content/patient/list" />
 		
-		</h:form>
--->
 	</ui:define>
 </ui:composition>
