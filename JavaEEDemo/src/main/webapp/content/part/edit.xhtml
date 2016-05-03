@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ext="http://java.sun.com/jsf/composite/ext"
+	template="/templates/default.xhtml">
+	
+	<f:metadata>
+		<f:viewParam
+			name="id" 
+			value="#{partDataAction.id}" />
+		<f:event
+			type="preRenderView"
+			listener="#{partDataAction.load()}" />
+	</f:metadata>
+	
+	<ui:define name="content">
+		
+		<h1>#{empty productAction.id ? 'Új alapanyag felvétele' : 'Alapanyag adatainak szerkesztése'}</h1>
+		
+		<h:form id="partEditForm">
+			
+			<ext:labeledField 
+				forId="partName" 
+				label="Név">
+				<h:inputText 
+					id="partName" 
+					value="#{partAction.entity.name}"
+					required="true" />
+			</ext:labeledField>
+
+			<ext:labeledField 
+				forId="stoName" 
+				label="Raktár">
+				<h:inputText 
+					id="stoName" 
+					value="#{partAction.entity.storage}"
+					required="true" />
+			</ext:labeledField>
+			
+			<ext:labeledField 
+				forId="proName" 
+				label="Termék">
+				<h:inputText 
+					id="proName" 
+					value="#{partAction.entity.product}"
+					required="true" />
+			</ext:labeledField>
+			
+			<ext:labeledField 
+				forId="quaName" 
+				label="Mennyiség">
+				<h:inputText 
+					id="quaName" 
+					value="#{partAction.entity.quantity}"
+					required="true" />
+			</ext:labeledField>
+
+			<h:commandLink
+				value="Mentés" 
+				action="#{partAction.persist()}" />
+				
+			<h:link
+				value="Vissza"
+				outcome="/content/part/list" />
+		
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

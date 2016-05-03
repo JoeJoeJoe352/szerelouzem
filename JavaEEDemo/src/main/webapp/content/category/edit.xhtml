@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ext="http://java.sun.com/jsf/composite/ext"
+	template="/templates/default.xhtml">
+	
+	<f:metadata>
+		<f:viewParam
+			name="id" 
+			value="#{productCategoryAction.id}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{productCategoryAction.load()}" />
+	</f:metadata>
+	
+	<ui:define name="content">
+	
+		<h1>#{empty productCategoryAction.id ? 'Új kategória felvétele' : 'Kategória szerkesztése'}</h1>
+		
+		<h:form id="productCategoryEditForm">
+
+			<ext:labeledField 
+			forId="catName" 
+			label="Név">
+			<h:inputText 
+				id="catName" 
+				value="#{productCategoryAction.entity.name}"
+				required="true" />
+			</ext:labeledField>
+			
+			<h:commandLink
+				value="Mentés" 
+				action="#{productCategoryAction.persist()}" />
+				
+			<h:link
+				value="Vissza"
+				outcome="/content/category/list" />
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>

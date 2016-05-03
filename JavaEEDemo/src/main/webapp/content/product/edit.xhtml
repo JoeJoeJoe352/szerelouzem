@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ext="http://java.sun.com/jsf/composite/ext"
+	template="/templates/default.xhtml">
+	
+	<f:metadata>
+		<f:viewParam
+			name="id" 
+			value="#{productAction.id}" />
+		<f:viewParam
+			name="cat_id" 
+			value="semmi" />
+		<f:event 
+			type="preRenderView"
+			listener="#{productAction.load()}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{productCategoryDataModel.load()}" />
+	</f:metadata>
+	
+	<ui:define name="content">
+	
+		<h1>#{empty productAction.id ? 'Új termék felvétele' : 'Termék adatainak szerkesztése'}</h1>
+		
+		<h:form id="productEditForm">
+			
+			<ext:labeledField 
+				forId="productName" 
+				label="Név">
+				<h:inputText 
+					id="productName" 
+					value="#{productAction.entity.name}"
+					required="true" />
+			</ext:labeledField>
+
+			<ext:labeledField 
+				
+				label="Kategória">
+				<h:selectOneMenu 
+					value="#{productCategory}"
+					converter="#{entityConverter}">
+					<f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
+    				<f:selectItems 
+    					value="#{productCategoryDataModel.list}" 
+    					var="name"
+						itemLabel="#{productCategory.name}"
+						itemValue="#{productCategory}"/>
+				</h:selectOneMenu>
+			</ext:labeledField>
+
+			<h:commandLink
+				value="Mentés" 
+				action="#{productAction.persist()}" />
+				
+			<h:link
+				value="Vissza"
+				outcome="/content/product/list" />
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>

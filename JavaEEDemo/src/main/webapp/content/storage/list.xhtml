@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+
+	<f:metadata>
+		<f:event 
+			type="preRenderView" 
+			listener="#{storageDataModel.load()}" />
+	</f:metadata>
+
+	<ui:define name="content">
+
+		<h1>Raktárak listája</h1>
+
+		<h:form id="storageListForm">
+
+			<div>
+				<h:outputText value="Még nem vettek fel raktárat az adatbázisba"
+					rendered="#{empty storageDataModel.list}" />
+			</div>
+
+			<h:dataTable 
+				id="storageTable" 
+				value="#{storageDataModel.list}"
+				var="storage" 
+				rendered="#{not empty storageDataModel.list}"
+				styleClass="simpletablestyle">
+				
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{storage.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Név</f:facet>
+					<h:outputText value="#{storage.name}" />
+				</h:column>
+
+			</h:dataTable>
+
+			<h:link value="Új raktár felvétele" outcome="/content/storage/edit" />
+			<h:link value="Vissza" outcome="/index" />
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

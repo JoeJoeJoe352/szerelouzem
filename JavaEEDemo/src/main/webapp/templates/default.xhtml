@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<h:head>
+		<title>Java EE Demo</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<h:outputStylesheet name="css/screen.css" />
+	</h:head>
+	
+	<h:body>
+		<div id="container">
+			<div>
+				<img id="image-1" alt="" src="resources/HanCsubi_javít.jpg" height="250" wifth="250" ismap="ismap"/>
+				<div id="title">Han és Csubi szerelőüzeme</div>
+			</div>
+			<div id="content">
+				<menu id="menu-1" label="main_menu" type="context">
+					<menuitem type="command" label="Alkatrészek"/>
+					<menuitem type="command" label="Kategóriák"/>
+					<menuitem type="command" label="Termékek"/>
+				</menu>
+				<ol>
+					<li>Item 1</li>
+					<li>Item 2</li>
+					<li>Item 3</li>
+				</ol>
+				<ui:insert name="content">
+					[Template content will be inserted here]
+				</ui:insert>
+			</div>
+			<div id="footer"></div>
+		</div>
+	</h:body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ext="http://java.sun.com/jsf/composite/ext"
+	template="/templates/default.xhtml">
+	
+	<f:metadata>
+		<f:viewParam
+			name="id" 
+			value="#{storageAction.id}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{storageAction.load()}" />
+	</f:metadata>
+	
+	<ui:define name="content">
+	
+		<h1>#{empty storageAction.id ? 'Új raktár felvétele' : 'Raktár adatainak szerkesztése'}</h1>
+		
+		<h:form id="storageEditForm">
+			
+			<ext:labeledField 
+				forId="productName" 
+				label="Név">
+				<h:inputText 
+					id="productName" 
+					value="#{storageAction.entity.name}"
+					required="true" />
+			</ext:labeledField>
+			
+			<h:commandLink
+				value="Mentés" 
+				action="#{storageAction.persist()}" />
+				
+			<h:link
+				value="Vissza"
+				outcome="/content/storage/list" />
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>
