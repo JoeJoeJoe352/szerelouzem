@@ -3,13 +3,20 @@ package hu.sed.prf.javaeedemo.dao;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import hu.sed.prf.javaeedemo.dao.GenericDao;
 import hu.sed.prf.javaeedemo.entity.Part;
 import hu.sed.prf.javaeedemo.entity.Product;
 import hu.sed.prf.javaeedemo.entity.Storage;
+import hu.sed.prf.javaeedemo.entity.measurement.WeightData;
 
 
 	public class PartDao extends GenericDao<Part, Long> {
@@ -59,5 +66,28 @@ import hu.sed.prf.javaeedemo.entity.Storage;
 			query.setParameter("prod", product);
 			query.executeUpdate();
 		}
+		
+		@Inject
+		private EntityManager entityManager;
+		
+		private Class<Part> entityClass;
+		
+		@Override
+		@Transactional
+		public List<Part> list() {
+			StringBuilder queryBuilder = new StringBuilder();
+			queryBuilder.append("SELECT part.name, part.id");
+			queryBuilder.append("FROM PART part");
+			
+			TypedQuery<Part> query = entityManager.createQuery(queryBuilder.toString(), entityClass);
+			return query.getResultList();
+		}
+		
+		/*
+			queryBuilder.append("SELECT par");
+			queryBuilder.append("FROM PART par, STORAGE sto, PRODUCT pro, PARTS_PRODUCT j, PARTS_STORAGE jj");
+			queryBuilder.append("WHERE par.id = j.part_id AND pro.id = j.product_id ");
+			queryBuilder.append("AND par.id = jj.part_id AND sto.id = jj.storage_id");
+		 */
 
 	}
