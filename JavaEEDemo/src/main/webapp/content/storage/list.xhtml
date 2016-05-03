@@ -38,6 +38,24 @@
 					<h:outputText value="#{storage.name}" />
 				</h:column>
 
+				<h:column>
+					<f:facet name="header">Műveletek</f:facet>
+
+					<div>
+						<h:link 
+							value="Szerkesztés" 
+							outcome="/content/storage/edit">
+							<f:param 
+								name="id" 
+								value="#{storage.id}" />
+						</h:link>
+						
+						<h:commandLink
+							value="Törlés" 
+							action="#{productAction.remove(storage.id)}" />
+					</div>
+
+				</h:column>
 			</h:dataTable>
 
 			<h:link value="Új raktár felvétele" outcome="/content/storage/edit" />

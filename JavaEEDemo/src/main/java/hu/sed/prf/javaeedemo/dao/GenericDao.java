@@ -1,14 +1,15 @@
 package hu.sed.prf.javaeedemo.dao;
 
 	import java.io.Serializable;
-	import java.util.List;
+import java.util.List;
 
 	import javax.inject.Inject;
-	import javax.persistence.EntityManager;
-	import javax.persistence.TypedQuery;
-	import javax.persistence.criteria.CriteriaBuilder;
-	import javax.persistence.criteria.CriteriaQuery;
-	import javax.persistence.criteria.Root;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 	public class GenericDao<EntityType, IdentifierType extends Serializable> implements Serializable {
 
@@ -27,6 +28,7 @@ package hu.sed.prf.javaeedemo.dao;
 			return entityManager.find(entityClass, identifier);
 		}
 
+		@Transactional
 		public List<EntityType> list() {
 			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 			

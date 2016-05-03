@@ -9,10 +9,22 @@
 	<f:metadata>
 		<f:viewParam
 			name="id" 
-			value="#{partDataAction.id}" />
+			value="#{partAction.id}" />
 		<f:event
 			type="preRenderView"
-			listener="#{partDataAction.load()}" />
+			listener="#{partAction.load()}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{productAction.load()}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{productDataModel.load()}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{storageAction.load()}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{storageDataModel.load()}" />
 	</f:metadata>
 	
 	<ui:define name="content">
@@ -29,23 +41,33 @@
 					value="#{partAction.entity.name}"
 					required="true" />
 			</ext:labeledField>
-
+					
 			<ext:labeledField 
-				forId="stoName" 
 				label="Raktár">
-				<h:inputText 
-					id="stoName" 
+				<h:selectOneMenu 
 					value="#{partAction.entity.storage}"
-					required="true" />
+					converter="#{entityConverter}">
+					<f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
+    				<f:selectItems 
+    					value="#{storageDataModel.list}" 
+    					var="sName"
+						itemLabel="#{storage.name}"
+						itemValue="#{storage}"/>
+				</h:selectOneMenu>
 			</ext:labeledField>
 			
 			<ext:labeledField 
-				forId="proName" 
 				label="Termék">
-				<h:inputText 
-					id="proName" 
+				<h:selectOneMenu 
 					value="#{partAction.entity.product}"
-					required="true" />
+					converter="#{entityConverter}">
+					<f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
+    				<f:selectItems 
+    					value="#{productDataModel.list}" 
+    					var="pName"
+						itemLabel="#{product.name}"
+						itemValue="#{product}"/>
+				</h:selectOneMenu>
 			</ext:labeledField>
 			
 			<ext:labeledField 

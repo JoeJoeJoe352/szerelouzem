@@ -4,7 +4,9 @@ package hu.sed.prf.javaeedemo.controller;
 	import hu.sed.prf.javaeedemo.dao.GenericDao;
 
 	import java.io.Serializable;
-	import java.util.List;
+import java.util.List;
+
+import javax.transaction.Transactional;
 
 	public abstract class AbstractDataModel<EntityType, IdentifierType extends Serializable> implements Serializable {
 		
@@ -12,6 +14,7 @@ package hu.sed.prf.javaeedemo.controller;
 		
 		private List<EntityType> list;
 		
+		@Transactional
 		public void load() {
 			list = getEntityDao().list();
 		}

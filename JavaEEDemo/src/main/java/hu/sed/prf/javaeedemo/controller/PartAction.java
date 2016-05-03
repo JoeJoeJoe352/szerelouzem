@@ -21,17 +21,13 @@ public class PartAction extends AbstractEntityAction<Part, Long> {
 	@Inject
 	private PartDao partDao;
 	
-	//@Inject
-	//private SelectedProductContainer selectedProductContainer;
-	
 	public PartAction() {
 		super(Part.class);
 	}
 	
 	@Override
 	protected void afterCreation() {
-		//getEntity().setProduct(selectedProductContainer.getSelectedProduct());
-		//getEntity().setDate(new Date());
+
 	}
 
 	@Override

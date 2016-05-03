@@ -9,6 +9,9 @@
 		<f:event 
 			type="preRenderView"
 			listener="#{productDataModel.load()}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{productCategoryDataModel.load()}" />
 	</f:metadata>
 	
 	<ui:define name="content">
@@ -47,17 +50,7 @@
 				
 				<h:column>
 					<f:facet name="header">Műveletek</f:facet>
-					
-					<div>
-						<h:link 
-							value="Alapanyagok" 
-							outcome="/content/part/list">
-							<f:param 
-								name="product" 
-								value="#{product.id}" />
-						</h:link>
-					</div>
-					
+
 					<div>
 						<h:link 
 							value="Szerkesztés" 

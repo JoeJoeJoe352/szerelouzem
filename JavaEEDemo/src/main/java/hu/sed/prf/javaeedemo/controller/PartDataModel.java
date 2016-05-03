@@ -5,7 +5,6 @@ package hu.sed.prf.javaeedemo.controller;
 	import javax.inject.Named;
 
 	import hu.sed.prf.javaeedemo.controller.AbstractDataModel;
-	import hu.sed.prf.javaeedemo.controller.SelectedProductContainer;
 	import hu.sed.prf.javaeedemo.dao.GenericDao;
 	import hu.sed.prf.javaeedemo.dao.PartDao;
 	import hu.sed.prf.javaeedemo.entity.Part;
@@ -18,14 +17,6 @@ package hu.sed.prf.javaeedemo.controller;
 		
 		@Inject
 		private PartDao partDao;
-		
-		@Inject
-		private SelectedProductContainer selectedProductContainer;
-		
-		@Override
-		public void load() {
-			setList(partDao.findByProduct(selectedProductContainer.getSelectedProduct()));
-		}
 
 		@Override
 		protected GenericDao<Part, Long> getEntityDao() {

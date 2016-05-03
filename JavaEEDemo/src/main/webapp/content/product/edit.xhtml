@@ -10,12 +10,12 @@
 		<f:viewParam
 			name="id" 
 			value="#{productAction.id}" />
-		<f:viewParam
-			name="cat_id" 
-			value="semmi" />
 		<f:event 
 			type="preRenderView"
 			listener="#{productAction.load()}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{productCategoryAction.load()}" />
 		<f:event 
 			type="preRenderView"
 			listener="#{productCategoryDataModel.load()}" />
@@ -37,10 +37,9 @@
 			</ext:labeledField>
 
 			<ext:labeledField 
-				
 				label="Kategória">
 				<h:selectOneMenu 
-					value="#{productCategory}"
+					value="#{productAction.entity.productCategory}"
 					converter="#{entityConverter}">
 					<f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
     				<f:selectItems 

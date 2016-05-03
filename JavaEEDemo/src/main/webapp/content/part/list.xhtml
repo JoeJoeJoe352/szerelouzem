@@ -8,15 +8,18 @@
 	<f:metadata>
 		<f:event 
 			type="preRenderView"
-			listener="#{selectedProductContainer.selectProduct(param['product'])}" />
+			listener="#{partDataModel.load()}" />
 		<f:event 
 			type="preRenderView"
-			listener="#{partDataModel.load()}" />
+			listener="#{productDataModel.load()}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{storageDataModel.load()}" />
 	</f:metadata>
 	
 	<ui:define name="content">
 	
-		<h1>#{selectedProductContainer.selectedProduct.name} alapanyagainak listjája</h1>
+		<h1>Alapanyagok listjája</h1>
 
 		<h:form id="partDataListForm">
 			
@@ -29,7 +32,7 @@
 			<h:dataTable 
 				id="partDataTable"
 				value="#{partDataModel.list}"
-				var="partData"
+				var="part"
 				rendered="#{not empty partDataModel.list}"
 				styleClass="simpletablestyle">
 				
@@ -49,25 +52,35 @@
 				</h:column>
 				
 				<h:column>
+					<f:facet name="header">Termék</f:facet>
+					<h:outputText value="#{part.product}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Raktár</f:facet>
+					<h:outputText value="#{part.storage}" />
+				</h:column>
+				
+				<h:column>
 					<f:facet name="header">Műveletek</f:facet>
 					<h:link 
-						value="Szerkesztés TODO" 
+						value="Szerkesztés" 
 						outcome="/content/part/edit">
-						<f:param name="id" value="#{partData.id}" />
+						<f:param name="id" value="#{part.id}" />
 					</h:link>
 					<h:commandLink
 						value="Törlés" 
-						action="#{partDataAction.remove(partData.id)}" />
+						action="#{partDataAction.remove(part.id)}" />
 				</h:column>
 			
 			</h:dataTable>
 			
 			<h:link
 				value="Új alapanyag"
-				outcome="/content/partdata/edit" />
+				outcome="/content/part/edit" />
 			<h:link
-				value="Vissza a termékek listájára"
-				outcome="/content/product/list" />
+				value="Vissza"
+				outcome="/index" />
 				
 		</h:form>
 
