@@ -1,5 +1,7 @@
 package hu.sed.prf.javaeedemo.controller;
 
+import java.util.List;
+
 import hu.sed.prf.javaeedemo.controller.AbstractEntityAction;
 import hu.sed.prf.javaeedemo.dao.GenericDao;
 import hu.sed.prf.javaeedemo.dao.PartDao;
@@ -49,7 +51,7 @@ public class ProductAction extends AbstractEntityAction<Product, Long> {
 	protected GenericDao<Product, Long> getEntityDao() {
 		return productDao;
 	}
-
+	
 	@Override
 	protected String getNavigationTargetAfterPersist() {
 		return NAVIGATION_TARGET_AFTER_PERSIST;

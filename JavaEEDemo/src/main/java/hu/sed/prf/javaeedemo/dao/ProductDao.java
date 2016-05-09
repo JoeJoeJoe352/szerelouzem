@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import hu.sed.prf.javaeedemo.dao.GenericDao;
+import hu.sed.prf.javaeedemo.entity.NumberCategory;
 import hu.sed.prf.javaeedemo.entity.Part;
 import hu.sed.prf.javaeedemo.entity.Product;
 import hu.sed.prf.javaeedemo.entity.ProductCategory;
@@ -40,5 +41,23 @@ import hu.sed.prf.javaeedemo.entity.Storage;
 			query.setParameter("prodCat", productCategory);
 			return query.getResultList();
 		}
+		
+		public List<Product> findAllProduct() {
+			StringBuilder sb = new StringBuilder();
+			sb.append("select product from Product product where product.id>10 ");
+			sb.append("order by product.productCategory");
+					
+			TypedQuery<Product> query = getEntityManager().createQuery(sb.toString(), getEntityClass());
+			return query.getResultList();
+		}
 
+		public List<NumberCategory> numberOfProductsByCategories() {
+			StringBuilder sb = new StringBuilder();
+			sb.append("select count(product),product.ProductCategory from Product product");
+			sb.append("group by product.ProductCategory");
+
+			TypedQuery<NumberCategory> query = getEntityManager().createQuery(sb.toString(), NumberCategory.class);
+			return query.getResultList();
+		}
+		
 	}

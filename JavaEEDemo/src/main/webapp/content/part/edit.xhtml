@@ -51,7 +51,7 @@
     				<f:selectItems 
     					value="#{storageDataModel.list}" 
     					var="sName"
-						itemLabel="#{storage.name}"
+						itemLabel="#{sName.name}"
 						itemValue="#{storage}"/>
 				</h:selectOneMenu>
 			</ext:labeledField>
@@ -65,7 +65,7 @@
     				<f:selectItems 
     					value="#{productDataModel.list}" 
     					var="pName"
-						itemLabel="#{product.name}"
+						itemLabel="#{pName.name}"
 						itemValue="#{product}"/>
 				</h:selectOneMenu>
 			</ext:labeledField>

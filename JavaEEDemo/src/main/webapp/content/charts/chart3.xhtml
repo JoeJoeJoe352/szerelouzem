@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Termékek kategóriánként -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	
+	<f:metadata>
+		<f:event 
+			type="preRenderView"
+			listener="#{productDataModel.load()}" />
+		<f:event 
+			type="preRenderView"
+			listener="#{productCategoryDataModel.load()}" />
+	</f:metadata>
+	
+	<ui:define name="content">
+	
+		<h1>Termékek listája</h1>
+
+		<h:form id="productListForm">
+			
+			<div>
+				<h:outputText
+					value="Még nem vettek fel terméket az adatbázisba"
+					rendered="#{empty productDataModel.list}" />
+			</div>
+		
+			<h:dataTable 
+				id="productTable"
+				value="#{productDataModel.list}"
+				var="product"
+				rendered="#{not empty productDataModel.list}"
+				styleClass="simpletablestyle">
+				
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{product.id}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Név</f:facet>
+					<h:outputText value="#{product.name}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Termékcsoport</f:facet>
+					<h:outputText value="#{product.productCategory}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Műveletek</f:facet>
+
+					<div>
+						<h:link 
+							value="Szerkesztés" 
+							outcome="/content/product/edit">
+							<f:param 
+								name="id" 
+								value="#{product.id}" />
+						</h:link>
+						
+						<h:commandLink
+							value="Törlés" 
+							action="#{productAction.remove(product.id)}" />
+					</div>
+
+				</h:column>
+			
+			</h:dataTable>
+			
+			<h:link
+				value="Új termék felvétele"
+				outcome="/content/product/edit" />
+			<h:link
+				value="Vissza"
+				outcome="/index" />
+				
+		</h:form>
+
+	</ui:define>
+</ui:composition>

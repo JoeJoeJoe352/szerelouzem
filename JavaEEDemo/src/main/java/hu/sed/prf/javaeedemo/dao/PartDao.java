@@ -76,13 +76,13 @@ import hu.sed.prf.javaeedemo.entity.measurement.WeightData;
 		@Transactional
 		public List<Part> list() {
 			StringBuilder queryBuilder = new StringBuilder();
-			queryBuilder.append("SELECT part.name, part.id");
-			queryBuilder.append("FROM PART part");
-			
-			TypedQuery<Part> query = entityManager.createQuery(queryBuilder.toString(), entityClass);
+			queryBuilder.append("SELECT part ");
+			queryBuilder.append("FROM Part part");
+					
+			TypedQuery<Part> query = entityManager.createQuery(queryBuilder.toString(), getEntityClass());
 			return query.getResultList();
 		}
-		
+
 		/*
 			queryBuilder.append("SELECT par");
 			queryBuilder.append("FROM PART par, STORAGE sto, PRODUCT pro, PARTS_PRODUCT j, PARTS_STORAGE jj");

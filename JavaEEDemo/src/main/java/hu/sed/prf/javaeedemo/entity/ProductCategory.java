@@ -78,6 +78,6 @@ package hu.sed.prf.javaeedemo.entity;
 
 		@Override
 		public String toString() {
-			return "ProductCategory [id=" + id + ", name=" + name + "]";
+			return ""+id+"";
 		}
 }

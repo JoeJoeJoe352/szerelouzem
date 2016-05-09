@@ -48,6 +48,20 @@ package hu.sed.prf.javaeedemo.controller;
 			}
 		}
 		
+		public void load2() {
+			if (null == id) {
+				try {
+					entity = entityClass.newInstance();
+					afterCreation();
+				} catch (InstantiationException | IllegalAccessException e) {
+					logger.severe("Cannot instantiate entity.");
+				}
+			} else {
+				entity = getEntityDao().findEntity(id);
+				afterFinding();
+			}
+		}
+		
 		protected void afterCreation() {
 			// Nothing to do here by default.
 		}
