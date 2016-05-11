@@ -4,14 +4,14 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/templates/default.xhtml"
-    >
-<!--  xmlns:p="http://primefaces.org/ui" --> 
+                xmlns:p="http://primefaces.org/ui">
+
 	<f:metadata>
 		<f:event type="preRenderView" listener="#{chart2DataModel.loader()}" />
 	</f:metadata>
 
 	<ui:define name="content">
-		<h1>Raktárak</h1>
+		<h1>Termékek kategóriánként</h1>
 
 		<h:form id="productListForm">
 
@@ -19,26 +19,8 @@
 				<h:outputText value="Még nem vettek fel terméket az adatbázisba"
 					rendered="#{empty chart2DataModel.listObject}" />
 			</div>
-			
-			
-    		
-    		<h:dataTable id="productTable" value="#{chart2DataModel.listObject}"
-				var="product" rendered="#{not empty chart2DataModel.listObject}"
-				styleClass="simpletablestyle">
 
-				<h:column>
-					<f:facet name="header">Raktár</f:facet>
-					<h:outputText value="#{product[1]}" />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">Mennyiség</f:facet>
-					<h:outputText value="#{product[0]}" />
-				</h:column>
-
-			</h:dataTable>
-    
-    		
+			<p:chart type="bar" model="#{chart2DataModel.barModel}" style="height:300px"/>
 
 			<h:link value="Vissza" outcome="/index" />
 

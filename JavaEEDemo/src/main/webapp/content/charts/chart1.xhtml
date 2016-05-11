@@ -6,57 +6,35 @@
 	template="/templates/default.xhtml">
 
 	<f:metadata>
-		<f:event type="preRenderView"
-			listener="#{productCategoryDataModel.load()}" />
-		<f:event type="preRenderView" listener="#{productDataModel.loader()}" />
+		<f:event type="preRenderView" listener="#{chart1DataModel.loader()}" />
 	</f:metadata>
 
 	<ui:define name="content">
-		<h1>Termékek listája</h1>
+		<h1>Termékek kategóriánként</h1>
 
 		<h:form id="productListForm">
 
 			<div>
 				<h:outputText value="Még nem vettek fel terméket az adatbázisba"
-					rendered="#{empty productDataModel.list}" />
+					rendered="#{empty chart1DataModel.listObject}" />
 			</div>
 
-			<h:dataTable id="productTable" value="#{productDataModel.list}"
-				var="product" rendered="#{not empty productDataModel.list}"
+			<h:dataTable id="productTable" value="#{chart1DataModel.listObject}"
+				var="product" rendered="#{not empty chart1DataModel.listObject}"
 				styleClass="simpletablestyle">
 
 				<h:column>
-					<f:facet name="header">ID</f:facet>
-					<h:outputText value="#{product.id}" />
+					<f:facet name="header">Kategória</f:facet>
+					<h:outputText value="#{product[1]}" />
 				</h:column>
 
 				<h:column>
-					<f:facet name="header">Név</f:facet>
-					<h:outputText value="#{product.name}" />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">Termékcsoport</f:facet>
-					<h:outputText value="#{product.productCategory}" />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">Műveletek</f:facet>
-
-					<div>
-						<h:link value="Szerkesztés" outcome="/content/product/edit">
-							<f:param name="id" value="#{product.id}" />
-						</h:link>
-
-						<h:commandLink value="Törlés"
-							action="#{productAction.remove(product.id)}" />
-					</div>
-
+					<f:facet name="header">Mennyiség</f:facet>
+					<h:outputText value="#{product[0]}" />
 				</h:column>
 
 			</h:dataTable>
 
-			<h:link value="Új termék felvétele" outcome="/content/product/edit" />
 			<h:link value="Vissza" outcome="/index" />
 
 		</h:form>
