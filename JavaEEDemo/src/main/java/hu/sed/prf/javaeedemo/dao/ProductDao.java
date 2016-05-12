@@ -4,6 +4,7 @@ package hu.sed.prf.javaeedemo.dao;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -21,7 +22,14 @@ import hu.sed.prf.javaeedemo.entity.Storage;
 			super(Product.class);
 		}
 		
+		@Inject
+		PartDao partDao;
+		
 		public void removeByProductCategory(ProductCategory productCategory) {
+			List<Product> list = findByProductCategory(productCategory);
+			for (Product p:list){
+				partDao.removeByProduct(p);
+			}
 			StringBuilder sb = new StringBuilder();
 			sb.append("delete from Product product");
 			sb.append("	where product.productCategory = :prodCat");
